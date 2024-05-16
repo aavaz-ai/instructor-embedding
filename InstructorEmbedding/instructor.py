@@ -530,7 +530,8 @@ class Instructor(SentenceTransformer):
             "cache_dir": cache_folder,
             "tqdm_class": disabled_tqdm,
         }
-        model_path = snapshot_download(**download_kwargs)
+        if not os.path.exists(model_path):
+            model_path = snapshot_download(**download_kwargs)
 
         # Check if the config_sentence_transformers.json file exists (exists since v2 of the framework)
         config_sentence_transformers_json_path = os.path.join(
